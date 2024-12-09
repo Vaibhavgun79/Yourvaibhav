@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Its by Vaibhav G</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Fredoka&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+            color: #333;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            font-family: 'Fredoka', cursive;
+            margin-bottom: 30px;
+            color: #4a148c;
+        }
+        p {
+            font-size: 1.2rem;
+            font-family: 'Open Sans', sans-serif;
+            color: #6a1b9a;
+            text-transform: capitalize;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: #007bb5;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background: #005f87;
+            transform: scale(1.1);
+        }
+        .no {
+            background: #8e24aa;
+        }
+        .no:hover {
+            background: #6a1b9a;
+        }
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .falling-hearts span {
+            position: absolute;
+            display: block;
+            width: 15px;
+            height: 15px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
+            animation: fall 5s infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .falling-hearts span:nth-child(odd) {
+            animation-duration: 4s;
+        }
+        .ring {
+            font-size: 5rem;
+            animation: pop 0.5s ease-out, horizontal-rotate 3s linear infinite;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes horizontal-rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <h1>A Special Message From Vaibhav Gundle</h1>
+        <p>Do you want to know a secret that comes straight from my heart?</p>
+        <button class="button" onclick="showNext('yes')">Yes</button>
+        <button class="button no" onclick="showNext('no')">No</button>
+    </div>
+
+    <footer style="position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 0.9rem; color: #555;">
+        © 2024 All rights reserved by Vaibhav Gundle.
+    </footer>
+
+    <div class="falling-hearts" id="hearts"></div>
+
+    <script>
+        function createHearts() {
+            const heartContainer = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('span');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartContainer.appendChild(heart);
+            }
+        }
+
+        function showNext(answer) {
+            const content = document.getElementById('content');
+            if (answer === 'yes') {
+                content.innerHTML = `
+                    <h1>Will You Be Mine Forever?</h1>
+                    <p>You are the reason my heart beats faster. Will you make me the happiest person alive?</p>
+                    <button class="button" onclick="showFinal('yes')">Yes</button>
+                    <button class="button no" onclick="showFinal('no')">No</button>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h1>Oh, What a Loss!</h1>
+                    <p>You just let a beautiful story remain untold...</p>
+                `;
+            }
+        }
+
+        function showFinal(answer) {
+            const content = document.getElementById('content');
+            if (answer === 'yes') {
+                createHearts();
+                content.innerHTML = `
+                    <h1>Thank You for Saying Yes! 💕</h1>
+                    <p>My life is complete because of you. Together, our love will shine forever.</p>
+                    <div class="ring">💍</div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h1>Heartbreak...</h1>
+                    <p>Even though you said no, you will always hold a special place in my heart. 💔</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
